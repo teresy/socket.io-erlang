@@ -182,7 +182,7 @@ handle_cast({TransportType, polling_request, Req, Server}, #state { server_modul
 
 %% Send to client
 handle_cast({send, Message}, #state{ connection_reference = {_TransportType, none}, message_buffer = Buffer } = State) ->
-    {noreply, State#state{ message_buffer = lists:append(Buffer, [Message])}};
+    {noreply, State#state{ message_buffer = Buffer ++ [Message]}};
 
 handle_cast({send, Message}, #state{ server_module = ServerModule,
                                      connection_reference = {TransportType, connected }, req = Req, caller = Caller,
